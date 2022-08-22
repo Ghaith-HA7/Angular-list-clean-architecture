@@ -1,20 +1,25 @@
+export interface MoviesDetails {
+    adult: boolean,
+    backdrop_path: string,
+    id: Number,
+    original_language: string,
+    original_title: string,
+    poster_path: string,
+    release_date: string,
+    title: string,
+    vote_average: string,
+    budget: Number,
+    revenue: Number,
+    status: string,
+    tagline: string,
+    overview: string,
+}
 export class MovieList {
     constructor(
-        public adult: boolean,
-        public backdrop_path: string,
-        public id: Number,
-        public original_language: string,
-        public original_title: string,
-        public poster_path: string,
-        public release_date: string,
-        public title: string,
-        public vote_average: string,
-        public budget: Number,
-        public revenue: Number,
-        public status: string,
-        public tagline: string,
-        public overview: string,
-
+        public results: MoviesDetails[],
+        public total_results: number,
+        public total_pages: number,
+        public page: 1,
     ) {
     }
 }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { movieConfig } from 'src/app/config/movie';
-import { MovieList } from 'src/app/core/entity';
+import { MovieList, MoviesDetails } from 'src/app/core/entity';
 import { MovieServicesRepository } from 'src/app/core/repository';
 
 @Injectable({
@@ -10,10 +10,10 @@ import { MovieServicesRepository } from 'src/app/core/repository';
 })
 export class MovieService extends MovieServicesRepository {
   
-  private movieList!: Observable<MovieList[]>;
-  private movieDetails!: Observable<MovieList[]>;
+  private movieList!: Observable<MovieList>;
+  private movieDetails!: Observable<MoviesDetails>;
   count$!: Observable<number>;
-  movieList$!: Observable<MovieList[]>;
+  movieList$!: Observable<MovieList>;
   _unsubscribeAll: Subject<any> = new Subject();
   
   constructor(
@@ -22,15 +22,16 @@ export class MovieService extends MovieServicesRepository {
     super();
   }
   
-  public getAllMovies(searchText: string = '', size: Number = 20, skip: Number = 0): Observable<MovieList[]> {
+  public getAllMovies(searchText: string = '', size: Number = 20, skip: Number = 0): Observable<MovieList> {
     try {
+      console.log('hellor from ghaith')
       if(searchText !== ''){
-        return this.httpClient.get<MovieList[]>(
+        return this.httpClient.get<MovieList>(
           `${movieConfig.SEARCH}&query=${searchText}`
         );
       }
       else {
-        return this.httpClient.get<MovieList[]>(
+        return this.httpClient.get<MovieList>(
           `${movieConfig.DICOVER}`
         );
       }
@@ -43,9 +44,9 @@ export class MovieService extends MovieServicesRepository {
   }
   
 
-  public getMovieDetails(movieId: number): Observable<MovieList[]>{
+  public getMovieDetails(movieId: number): Observable<MoviesDetails>{
     try {
-      return this.httpClient.get<MovieList[]>(
+      return this.httpClient.get<MoviesDetails>(
         `${movieConfig.DETAILS}/${movieId}?api_key=${movieConfig.API}`
       );
       

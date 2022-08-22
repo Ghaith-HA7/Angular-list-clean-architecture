@@ -1,7 +1,7 @@
-import {MovieList} from '../../core/entity';
+import { MoviesDetails} from '../../core/entity';
 
 export class MovieDetailsViewModel {
-  public movieDetails: MovieList = {
+  public movieDetails: MoviesDetails = {
       adult: false,
       backdrop_path: '',
       id: 0,

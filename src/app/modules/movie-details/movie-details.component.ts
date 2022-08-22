@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { movieConfig } from 'src/app/config/movie';
-import { MovieList } from 'src/app/core/entity';
+import { MovieList, MoviesDetails } from 'src/app/core/entity';
 import { MovieService } from 'src/app/core/services/movie/movie.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { MovieService } from 'src/app/core/services/movie/movie.service';
 export class MovieDetailsComponent {
   isLoading: boolean = false;
   movieId: any = 0;
-  movieDetails: MovieList = {
+  movieDetails: MoviesDetails = {
     adult: false,
     backdrop_path: '',
     id: 0,

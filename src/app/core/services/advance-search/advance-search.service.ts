@@ -7,12 +7,13 @@ import { AdvancedSearchRepository } from 'src/app/core/repository';
 })
 export class AdvancedSearchService extends AdvancedSearchRepository {
   
-  public searchText: BehaviorSubject<string> = new BehaviorSubject('');
+  public searchText: BehaviorSubject<string>;
   _unsubscribeAll: Subject<any> = new Subject();
   
   constructor(
   ){
     super();
+    this.searchText = new BehaviorSubject('');
   }
   setSearchText(text: string): void {
     this.searchText.next(text);
@@ -23,4 +24,11 @@ export class AdvancedSearchService extends AdvancedSearchRepository {
   removeSearchText(): void {
     this.searchText.next(' ');
   }
+  
+  ngOnDestroy(): void
+    {
+        // Unsubscribe from all subscriptions
+        this._unsubscribeAll.next(null);
+        this._unsubscribeAll.complete();
+    }
 }
